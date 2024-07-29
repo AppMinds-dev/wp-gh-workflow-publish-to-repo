@@ -8,7 +8,7 @@ branding:
 
 inputs:
   artifact-url:
-    required: true
+    required: false
     description: 'Url of the zip archive'
 
 runs:
