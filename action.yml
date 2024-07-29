@@ -83,6 +83,11 @@ runs:
     #     server-dir: '~/public_html/repo.appminds.dev/wp/packages/'
     #     timeout: 60000
 
+    - name: 'Checkout'
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
     - name: 'Deploy'
       uses: milanmk/actions-file-deployer@master
       with:
