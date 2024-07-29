@@ -1,5 +1,5 @@
-name: 'WordPress Plugin Build Zip'
-description: 'Github workflow for building Wordpress plugin and theme zip'
+name: 'WordPress Plugin & Theme Publish to Repository'
+description: 'Github workflow for deploying Wordpress plugin and theme zip to repo'
 author: 'Manuel Bachl | AppMinds.dev'
 
 branding:
@@ -7,39 +7,42 @@ branding:
   color: 'blue'
 
 inputs:
-  retention-days:
-    description: 'How many days to keep the zip archive'
-    default: '5'
-  slug:
-    required: false
-    description: 'Name of the zip archive'
-    default: ${GITHUB_REPOSITORY#*/}
-
-outputs:
   artifact-url:
-    description: 'Path to the zip archive'
-    value: ${{ steps.upload-plugin-artifact.outputs.artifact-url }}
+    required: true
+    description: 'Url of the zip archive'
 
 runs:
   using: 'composite'
   steps:
-    - name: Generate zip archive
-      id: archive
-      run: |
-        echo ${{ inputs.slug }}
-        cd ..
-        zip -r "${GITHUB_WORKSPACE}/${{ inputs.slug }}.zip" .
-      shell: bash
+    - name: Display structure of downloaded files
+      uses: actions/download-artifact@v4
+      run: ls -R
 
-    - name: Unzip the archive (prevents double zip problem)
-      id: unzip
-      run: unzip ${{ inputs.slug }}.zip -d zipfile
-      shell: bash
+    # - name: Download artifact
+    #   id: download-artifact
+    #   run: |
+    #     curl -L \
+    #     -H "Accept: application/vnd.github+json" \
+    #     -H "Authorization: Bearer <YOUR-TOKEN>" \
+    #     -H "X-GitHub-Api-Version: 2022-11-28" \
+    #     ${{ inputs.artifact-url }}
+    #     echo ${{ inputs.artifact-url }}
+    #     cd ..
+    #     zip -r "${GITHUB_WORKSPACE}/${{ inputs.slug }}.zip" .
+    #   shell: bash
 
-    - name: Upload the archive as an artifact
-      id: upload-plugin-artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ inputs.slug }}
-        path: zipfile
-        retention-days: ${{ inputs.retention-days }}
+    # - name: Unzip the archive (prevents double zip problem)
+    #   id: unzip
+    #   run: unzip ${{ inputs.slug }}.zip -d zipfile
+    #   shell: bash
+
+    # - name: Upload the archive as an artifact
+    #   id: upload-plugin-artifact
+    #   uses: actions/download-artifact@v4
+    #   with:
+    #     name: ${{ inputs.artifact-url }}
+    #     path: ${GITHUB_WORKSPACE}
+    #     retention-days: ${{ inputs.retention-days }}
+
+    # https://api.github.com/repos/OWNER/REPO/actions/artifacts/ARTIFACT_ID/ARCHIVE_FORMAT
+    # https://github.com/scubacations/guardians-of-the-deep-blue-widgets/actions/runs/10144678685/artifacts/1750782264
