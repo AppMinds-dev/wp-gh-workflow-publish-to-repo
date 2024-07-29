@@ -83,17 +83,28 @@ runs:
     #     server-dir: '~/public_html/repo.appminds.dev/wp/packages/'
     #     timeout: 60000
 
-    - name: 'Checkout'
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+    # - name: 'Checkout'
+    #   uses: actions/checkout@v4
+    #   with:
+    #     fetch-depth: 0
         
-    - name: 'Deploy'
-      uses: milanmk/actions-file-deployer@master
+    # - name: 'Deploy'
+    #   uses: milanmk/actions-file-deployer@master
+    #   with:
+    #     remote-protocol: 'sftp'
+    #     remote-host: ${{ inputs.host }}
+    #     remote-user: ${{ inputs.username }}
+    #     remote-password: ${{ inputs.password }}
+    #     local-path: './${{ inputs.slug }}/'
+    #     remote-path: '~/public_html/repo.appminds.dev/wp/packages/'
+
+    - name: Deploy file
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
-        remote-protocol: 'sftp'
-        remote-host: ${{ inputs.host }}
-        remote-user: ${{ inputs.username }}
-        remote-password: ${{ inputs.password }}
-        local-path: './${{ inputs.slug }}/'
-        remote-path: '~/public_html/repo.appminds.dev/wp/packages/'
+        server: ${{ inputs.host }}
+        port: ${{ inputs.port }}
+        username: ${{ inputs.username }}
+        password: ${{ inputs.password }}
+        local_path: './${{ inputs.slug }}/${{ inputs.slug }}.zip'
+        remote_path: './public_html/repo.appminds.dev/wp/packages/'
+        sftp_only: true
