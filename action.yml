@@ -52,14 +52,14 @@ runs:
     #     # target: '/home/${{ inputs.username }}/public_html/repo.appminds.dev/wp/packages/'
     #     strip_components: 2
 
-    # - name: Deploy to FTP
-    #   uses: garygrossgarten/github-action-scp@release
-    #   with:
-    #     host: ${{ inputs.host }}
-    #     username: ${{ inputs.username }}
-    #     password: ${{ inputs.password }}
-    #     local: '${{ inputs.slug }}/${{ inputs.slug }}.zip'
-    #     remote: '~/public_html/repo.appminds.dev/wp/packages/'
+    - name: Deploy to FTP
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        host: ${{ inputs.host }}
+        username: ${{ inputs.username }}
+        password: ${{ inputs.password }}
+        local: '${{ inputs.slug }}/${{ inputs.slug }}.zip'
+        remote: '~/public_html/repo.appminds.dev/wp/packages/'
 
     # - name: 📂 SFTP uploader
     #   uses: wangyucode/sftp-upload-action@v2.0.2
@@ -69,14 +69,4 @@ runs:
     #     password: ${{ inputs.password }}
     #     # forceUpload: true
     #     localDir: './${{ inputs.slug }}'
-    #     remoteDir: '~/public_html/repo.appminds.dev/wp/packages/'
-
-    - name: Deploy to FTP
-      uses: Creepios/sftp-action@v1.0.3
-      with:
-        host: ${{ inputs.host }}
-        port: ${{ inputs.port }}
-        username: ${{ inputs.username }}
-        password: ${{ inputs.password }}
-        localPath: '${{ inputs.slug }}/${{ inputs.slug }}.zip'
-        remotePath: '~/public_html/repo.appminds.dev/wp/packages/'
+    #     remoteDir: '/public_html/repo.appminds.dev/wp/packages/'
