@@ -46,5 +46,5 @@ runs:
         port: ${{ inputs.port }}
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
-        source: "./${{ inputs.slug }}.zip"
-        target: "repo.appminds.dev/packages"
+        source: "../${{ inputs.slug }}.zip"
+        target: "/public_html/repo.appminds.dev/wp/packages"
