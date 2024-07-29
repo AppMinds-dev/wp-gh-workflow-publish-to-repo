@@ -1,0 +1,45 @@
+name: 'WordPress Plugin Build Zip'
+description: 'Github workflow for building Wordpress plugin and theme zip'
+author: 'Manuel Bachl | AppMinds.dev'
+
+branding:
+  icon: 'archive'
+  color: 'blue'
+
+inputs:
+  retention-days:
+    description: 'How many days to keep the zip archive'
+    default: '5'
+  slug:
+    required: false
+    description: 'Name of the zip archive'
+    default: ${GITHUB_REPOSITORY#*/}
+
+outputs:
+  artifact-url:
+    description: 'Path to the zip archive'
+    value: ${{ steps.upload-plugin-artifact.outputs.artifact-url }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Generate zip archive
+      id: archive
+      run: |
+        echo ${{ inputs.slug }}
+        cd ..
+        zip -r "${GITHUB_WORKSPACE}/${{ inputs.slug }}.zip" .
+      shell: bash
+
+    - name: Unzip the archive (prevents double zip problem)
+      id: unzip
+      run: unzip ${{ inputs.slug }}.zip -d zipfile
+      shell: bash
+
+    - name: Upload the archive as an artifact
+      id: upload-plugin-artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.slug }}
+        path: zipfile
+        retention-days: ${{ inputs.retention-days }}
