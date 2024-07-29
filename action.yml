@@ -6,10 +6,10 @@ branding:
   icon: 'archive'
   color: 'blue'
 
-inputs:
-  artifact-url:
-    required: false
-    description: 'Url of the zip archive'
+# inputs:
+#   artifact-url:
+#     required: false
+#     description: 'Url of the zip archive'
 
 runs:
   using: 'composite'
