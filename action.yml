@@ -67,6 +67,6 @@ runs:
         host: ${{ inputs.host }}
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
-        forceUpload: true
+        # forceUpload: true
         localDir: './${{ inputs.slug }}'
         remoteDir: '~/public_html/repo.appminds.dev/wp/packages/'
