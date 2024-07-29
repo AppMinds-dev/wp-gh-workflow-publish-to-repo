@@ -81,3 +81,4 @@ runs:
         protocol: ftp
         local-dir: './${{ inputs.slug }}/'
         server-dir: '~/public_html/repo.appminds.dev/wp/packages/'
+        timeout: 60000
