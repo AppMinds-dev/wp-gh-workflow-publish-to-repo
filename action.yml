@@ -78,6 +78,6 @@ runs:
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
         port: ${{ inputs.port }}
-        protocol: ftps
+        protocol: sftp
         local-dir: './${{ inputs.slug }}/'
         server-dir: '~/public_html/repo.appminds.dev/wp/packages/'
