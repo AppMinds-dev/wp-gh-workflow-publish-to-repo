@@ -14,16 +14,16 @@ inputs:
   host:
     required: true
     description: 'Repository host'
-  username:
-    required: true
-    description: 'FTP username'
-  password:
-    required: true
-    description: 'FTP password'
   port:
     required: false
-    description: 'FTP port'
+    description: 'SSH port'
     default: '22'
+  username:
+    required: true
+    description: 'SSH username'
+  password:
+    required: true
+    description: 'SSH password'
 
 runs:
   using: 'composite'
@@ -42,10 +42,9 @@ runs:
     - name: Deploy to FTP
       uses: appleboy/scp-action@v0.1.7
       with:
-        server: ${{ inputs.host }}
-        username: ${{ inputs.username }}
-        password: ${{ inputs.password }}
+        host: ${{ inputs.host }}
         port: ${{ inputs.port }}
+        username: ${{ inputs.username }}
+        password: ${{ inputs.passwordy }}
         source: "./${{ inputs.slug }}.zip"
         target: "repo.appminds.dev/packages"
-
