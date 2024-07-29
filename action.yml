@@ -48,7 +48,8 @@ runs:
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
         source: "./${{ inputs.slug }}/${{ inputs.slug }}.zip"
-        target: "/home/${{ inputs.username }}/public_html/repo.appminds.dev/wp/packages/"
+        target: "/public_html/repo.appminds.dev/wp/packages/"
+        # target: "/home/${{ inputs.username }}/public_html/repo.appminds.dev/wp/packages/"
         strip_components: 2
 
     # - name: Deploy to FTP
