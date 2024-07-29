@@ -71,14 +71,24 @@ runs:
     #     localDir: './${{ inputs.slug }}'
     #     remoteDir: '/public_html/repo.appminds.dev/wp/packages/'
 
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+    # - name: 📂 Sync files
+    #   uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+    #   with:
+    #     server: ${{ inputs.host }}
+    #     username: ${{ inputs.username }}
+    #     password: ${{ inputs.password }}
+    #     port: ${{ inputs.port }}
+    #     protocol: ftp
+    #     local-dir: './${{ inputs.slug }}/'
+    #     server-dir: '~/public_html/repo.appminds.dev/wp/packages/'
+    #     timeout: 60000
+
+    - name: 'Deploy'
+      uses: milanmk/actions-file-deployer@master
       with:
-        server: ${{ inputs.host }}
-        username: ${{ inputs.username }}
-        password: ${{ inputs.password }}
-        port: ${{ inputs.port }}
-        protocol: ftp
-        local-dir: './${{ inputs.slug }}/'
-        server-dir: '~/public_html/repo.appminds.dev/wp/packages/'
-        timeout: 60000
+        remote-protocol: 'sftp'
+        remote-host: ${{ inputs.host }}
+        remote-user: ${{ inputs.username }}
+        remote-password: ${{ inputs.password }}
+        local-path: './${{ inputs.slug }}/'
+        remote-path: '~/public_html/repo.appminds.dev/wp/packages/'
