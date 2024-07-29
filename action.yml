@@ -23,7 +23,7 @@ runs:
     - name: List artifacts
       run: |
         cd ./${{ inputs.slug }}
-        ls la
+        ls -la
       shell: bash
 
     # - name: Download artifact
