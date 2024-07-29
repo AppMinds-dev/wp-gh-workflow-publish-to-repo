@@ -48,4 +48,4 @@ runs:
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
         source: "./${{ inputs.slug }}/${{ inputs.slug }}.zip"
-        target: "/public_html/repo.appminds.dev/wp/packages"
+        target: "/home/sx3vouzd25ee/public_html/repo.appminds.dev/wp/packages"
