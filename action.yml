@@ -17,11 +17,11 @@ runs:
     - name: Download artifacts
       uses: actions/download-artifact@v4
       with:
-        path: ${GITHUB_WORKSPACE}/artifacts
+        path: ./artifacts
 
     - name: List artifacts
       run: |
-        cd ${GITHUB_WORKSPACE}/artifacts
+        cd ./artifacts
         ls -R .
       shell: bash
 
