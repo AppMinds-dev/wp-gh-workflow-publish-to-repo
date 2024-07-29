@@ -77,3 +77,7 @@ runs:
         server: ${{ inputs.host }}
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
+        port: ${{ inputs.port }}
+        protocol: ftps
+        local-dir: './${{ inputs.slug }}'
+        server-dir: '~/public_html/repo.appminds.dev/wp/packages/'
