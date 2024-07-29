@@ -37,68 +37,9 @@ runs:
       run: |
         cd ./${{ inputs.slug }}
         ls -la
-        echo $(pwd)
       shell: bash
 
-    # - name: Deploy to FTP
-    #   uses: appleboy/scp-action@v0.1.7
-    #   with:
-    #     host: ${{ inputs.host }}
-    #     port: ${{ inputs.port }}
-    #     username: ${{ inputs.username }}
-    #     password: ${{ inputs.password }}
-    #     source: '${{ inputs.slug }}/${{ inputs.slug }}.zip'
-    #     target: '~/public_html/repo.appminds.dev/wp/packages/'
-    #     # target: '/home/${{ inputs.username }}/public_html/repo.appminds.dev/wp/packages/'
-    #     strip_components: 2
-
-    # - name: Deploy to FTP
-    #   uses: garygrossgarten/github-action-scp@release
-    #   with:
-    #     host: ${{ inputs.host }}
-    #     username: ${{ inputs.username }}
-    #     password: ${{ inputs.password }}
-    #     local: '${{ inputs.slug }}/${{ inputs.slug }}.zip'
-    #     remote: '~/public_html/repo.appminds.dev/wp/packages/'
-
-    # - name: 📂 SFTP uploader
-    #   uses: wangyucode/sftp-upload-action@v2.0.2
-    #   with:
-    #     host: ${{ inputs.host }}
-    #     username: ${{ inputs.username }}
-    #     password: ${{ inputs.password }}
-    #     # forceUpload: true
-    #     localDir: './${{ inputs.slug }}'
-    #     remoteDir: '/public_html/repo.appminds.dev/wp/packages/'
-
-    # - name: 📂 Sync files
-    #   uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-    #   with:
-    #     server: ${{ inputs.host }}
-    #     username: ${{ inputs.username }}
-    #     password: ${{ inputs.password }}
-    #     port: ${{ inputs.port }}
-    #     protocol: ftp
-    #     local-dir: './${{ inputs.slug }}/'
-    #     server-dir: '~/public_html/repo.appminds.dev/wp/packages/'
-    #     timeout: 60000
-
-    # - name: 'Checkout'
-    #   uses: actions/checkout@v4
-    #   with:
-    #     fetch-depth: 0
-        
-    # - name: 'Deploy'
-    #   uses: milanmk/actions-file-deployer@master
-    #   with:
-    #     remote-protocol: 'sftp'
-    #     remote-host: ${{ inputs.host }}
-    #     remote-user: ${{ inputs.username }}
-    #     remote-password: ${{ inputs.password }}
-    #     local-path: './${{ inputs.slug }}/'
-    #     remote-path: '~/public_html/repo.appminds.dev/wp/packages/'
-
-    - name: Deploy file
+    - name: Deploy zip file
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
         server: ${{ inputs.host }}
