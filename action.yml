@@ -49,7 +49,7 @@ runs:
         password: ${{ inputs.password }}
         source: "./${{ inputs.slug }}/${{ inputs.slug }}.zip"
         target: "/home/${{ inputs.username }}/public_html/repo.appminds.dev/wp/packages/"
-        strip_components: 1
+        strip_components: 2
 
     # - name: Deploy to FTP
     #   uses: garygrossgarten/github-action-scp@release
