@@ -48,4 +48,13 @@ runs:
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
         source: "./${{ inputs.slug }}/${{ inputs.slug }}.zip"
-        target: "/home/sx3vouzd25ee/public_html/repo.appminds.dev/wp/packages"
+        target: "/home/${{ inputs.username }}/public_html/repo.appminds.dev/wp/packages/${{ inputs.slug }}.zip"
+
+    # - name: Deploy to FTP
+    #   uses: garygrossgarten/github-action-scp@release
+    #   with:
+    #     host: ${{ inputs.host }}
+    #     username: ${{ inputs.username }}
+    #     password: ${{ inputs.password }}
+    #     local: "./${{ inputs.slug }}/${{ inputs.slug }}.zip"
+    #     remote: "/home/sx3vouzd25ee/public_html/repo.appminds.dev/wp/packages/${{ inputs.slug }}.zip"
