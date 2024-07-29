@@ -14,9 +14,16 @@ branding:
 runs:
   using: 'composite'
   steps:
-    - name: Display structure of downloaded files
+    - name: Download artifacts
       uses: actions/download-artifact@v4
-      run: ls -R
+      with:
+        path: ${GITHUB_WORKSPACE}/artifacts
+
+    - name: List artifacts
+      run: |
+        cd ${GITHUB_WORKSPACE}/artifacts
+        ls -R .
+      shell: bash
 
     # - name: Download artifact
     #   id: download-artifact
