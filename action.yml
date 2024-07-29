@@ -37,6 +37,7 @@ runs:
       run: |
         cd ./${{ inputs.slug }}
         ls -la
+        echo $(pwd)
       shell: bash
 
     - name: Deploy to FTP
@@ -46,5 +47,5 @@ runs:
         port: ${{ inputs.port }}
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
-        source: "../${{ inputs.slug }}.zip"
+        source: "./${{ inputs.slug }}/${{ inputs.slug }}.zip"
         target: "/public_html/repo.appminds.dev/wp/packages"
