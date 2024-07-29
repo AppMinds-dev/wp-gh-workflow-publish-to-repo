@@ -6,10 +6,11 @@ branding:
   icon: 'archive'
   color: 'blue'
 
-# inputs:
-#   artifact-url:
-#     required: false
-#     description: 'Url of the zip archive'
+inputs:
+  slug:
+    required: false
+    description: 'Name of the zip archive'
+    default: ${GITHUB_REPOSITORY#*/}
 
 runs:
   using: 'composite'
@@ -17,12 +18,12 @@ runs:
     - name: Download artifacts
       uses: actions/download-artifact@v4
       with:
-        path: ./artifacts
+        path: .
 
     - name: List artifacts
       run: |
-        cd ./artifacts
-        ls -R .
+        cd ./${{ inputs.slug }}
+        ls la
       shell: bash
 
     # - name: Download artifact
