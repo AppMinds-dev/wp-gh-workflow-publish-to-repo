@@ -40,21 +40,22 @@ runs:
         echo $(pwd)
       shell: bash
 
-    # - name: Deploy to FTP
-    #   uses: appleboy/scp-action@v0.1.7
-    #   with:
-    #     host: ${{ inputs.host }}
-    #     port: ${{ inputs.port }}
-    #     username: ${{ inputs.username }}
-    #     password: ${{ inputs.password }}
-    #     source: "./${{ inputs.slug }}/${{ inputs.slug }}.zip"
-    #     target: "/home/${{ inputs.username }}/public_html/repo.appminds.dev/wp/packages/${{ inputs.slug }}.zip"
-
     - name: Deploy to FTP
-      uses: garygrossgarten/github-action-scp@release
+      uses: appleboy/scp-action@v0.1.7
       with:
         host: ${{ inputs.host }}
+        port: ${{ inputs.port }}
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
-        local: "./${{ inputs.slug }}/${{ inputs.slug }}.zip"
-        remote: "/home/sx3vouzd25ee/public_html/repo.appminds.dev/wp/packages/${{ inputs.slug }}.zip"
+        source: "./${{ inputs.slug }}/${{ inputs.slug }}.zip"
+        target: "/home/${{ inputs.username }}/public_html/repo.appminds.dev/wp/packages/"
+        strip_components: 1
+
+    # - name: Deploy to FTP
+    #   uses: garygrossgarten/github-action-scp@release
+    #   with:
+    #     host: ${{ inputs.host }}
+    #     username: ${{ inputs.username }}
+    #     password: ${{ inputs.password }}
+    #     local: "./${{ inputs.slug }}/${{ inputs.slug }}.zip"
+    #     remote: "/home/sx3vouzd25ee/public_html/repo.appminds.dev/wp/packages/"
