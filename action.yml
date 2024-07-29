@@ -11,6 +11,19 @@ inputs:
     required: false
     description: 'Name of the zip archive'
     default: ${GITHUB_REPOSITORY#*/}
+  host:
+    required: true
+    description: 'Repository host'
+  username:
+    required: true
+    description: 'FTP username'
+  password:
+    required: true
+    description: 'FTP password'
+  port:
+    required: false
+    description: 'FTP port'
+    default: '22'
 
 runs:
   using: 'composite'
@@ -26,31 +39,13 @@ runs:
         ls -la
       shell: bash
 
-    # - name: Download artifact
-    #   id: download-artifact
-    #   run: |
-    #     curl -L \
-    #     -H "Accept: application/vnd.github+json" \
-    #     -H "Authorization: Bearer <YOUR-TOKEN>" \
-    #     -H "X-GitHub-Api-Version: 2022-11-28" \
-    #     ${{ inputs.artifact-url }}
-    #     echo ${{ inputs.artifact-url }}
-    #     cd ..
-    #     zip -r "${GITHUB_WORKSPACE}/${{ inputs.slug }}.zip" .
-    #   shell: bash
+    - name: Deploy to FTP
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        server: ${{ inputs.host }}
+        username: ${{ inputs.username }}
+        password: ${{ inputs.password }}
+        port: ${{ inputs.port }}
+        source: "./${{ inputs.slug }}.zip"
+        target: "/packages"
 
-    # - name: Unzip the archive (prevents double zip problem)
-    #   id: unzip
-    #   run: unzip ${{ inputs.slug }}.zip -d zipfile
-    #   shell: bash
-
-    # - name: Upload the archive as an artifact
-    #   id: upload-plugin-artifact
-    #   uses: actions/download-artifact@v4
-    #   with:
-    #     name: ${{ inputs.artifact-url }}
-    #     path: ${GITHUB_WORKSPACE}
-    #     retention-days: ${{ inputs.retention-days }}
-
-    # https://api.github.com/repos/OWNER/REPO/actions/artifacts/ARTIFACT_ID/ARCHIVE_FORMAT
-    # https://github.com/scubacations/guardians-of-the-deep-blue-widgets/actions/runs/10144678685/artifacts/1750782264
