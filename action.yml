@@ -18,6 +18,9 @@ inputs:
     required: false
     description: 'SSH port'
     default: '22'
+  path:
+    required: true
+    description: 'Remote path for the upload'
   username:
     required: true
     description: 'SSH username'
