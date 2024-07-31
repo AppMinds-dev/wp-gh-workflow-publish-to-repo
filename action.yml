@@ -47,5 +47,5 @@ runs:
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
         local_path: './${{ inputs.slug }}/${{ inputs.slug }}.zip'
-        remote_path: './public_html/repo.appminds.dev/wp/packages/'
+        remote_path: ${{ inputs.path }}
         sftp_only: true
